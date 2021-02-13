@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=false;">
+    <title>Login - Galeria sztuki</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<div th:replace="fragments.html :: menu"></div>
+<div class="container bg-light py-5">
+    <div class="row">
+        <div class="col-3">
+            <a href="/main" class="btn btn-dark">Return</a>
+        </div>
+        <div class="col">
+            <form method="post">
+                <div class="form-group">
+                 <input type="text" th:field="*{artPiece.name}" class="form-control" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <input type="text" th:field="*{artPiece.creator}" class="form-control" placeholder="Artist">
+                </div>
+                <div class="form-group">
+                    <input type="text" th:field="*{artPiece.category}" class="form-control" placeholder="Category">
+                </div>
+                <div class="form-group">
+                    <input type="text" th:field="*{artPiece.style}" class="form-control" placeholder="Style">
+                </div>
+                <div class="form-group">
+                    <input type="text" th:field="*{artPiece.price}" class="form-control" placeholder="Price">
+                </div>
+                    <input class="btn btn-primary" type="submit" value="Save">
+            </form>
+            <a class="btn btn-danger mt-3" th:href="@{/delete_artPiece/{id}(id=${artPiece.id})}">Delete</a>
+        </div>
+        <div class="col-3"></div>
+
+
+</div>
+</body>
+</html>

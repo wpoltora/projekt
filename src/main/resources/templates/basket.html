@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=false;">
+    <title>Title</title>
+    <link rel="stylesheet" href="basket.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments.html :: menu"></div>
+    <div class="container bg-light py-5">
+        <th:block th:each="artPiece : ${artPieces}">
+                <div class="font-weight-bold" th:text="${artPiece.name}"></div>
+            <div class="ml-3 mb-4">
+                <div th:text="${artPiece.creator}"></div>
+                <div th:text="${artPiece.price} + ' zł'"></div>
+                <a class="btn btn-dark" th:href="@{/deleteFromBasket/{id}(id=${artPiece.id})}">Remove</a>
+            </div>
+        </th:block>
+        <div id="total">
+            <div class="font-weight-bold mt-4">Total: </div>
+            <div th:text="${sum} + ' zł'"></div>
+        </div>
+    </div>
+</body>
+</html>

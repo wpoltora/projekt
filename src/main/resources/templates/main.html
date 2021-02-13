@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=false;">
+    <title>Login - Galeria sztuki</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+</head>
+
+<body>
+<div th:replace="fragments.html :: menu"></div>
+<div class="container bg-light py-5">
+    <h1 class="mb-4">Art pieces: </h1>
+    <a class="btn btn-dark mb-4 ml-4" th:if="${role == 'ADMIN'}" href="/new">Add new piece</a>
+    <div class="dropdown mb-4 ml-4">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
+            Sort by:
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="/sort_category">Category</a>
+            <a class="dropdown-item" href="/sort_style">Style</a>
+            <a class="dropdown-item" href="/sort_creator">Artist</a>
+            <a class="dropdown-item" href="/sort_price">Price</a>
+            <a class="dropdown-item" href="/sort_name">Name</a>
+        </div>
+    </div>
+
+
+
+
+    <th:block th:each="artPiece : ${artPieces}">
+        <div class="artPiece-list mb-4 p-3 mx-4">
+            <div th:text="${artPiece.name}" class="artPiece-name font-weight-bold"></div>
+            <div class="artPiece-info m-2">
+                <div th:text="'Artist: ' + ${artPiece.creator}"></div>
+                <div th:text="'Category: ' + ${artPiece.category}"></div>
+                <div th:text="'Style: ' + ${artPiece.style}"></div>
+                <div th:text="'Price: ' + ${artPiece.price}"></div>
+                <a class="btn btn-dark" th:href="@{/addToBasket/{id}(id=${artPiece.id})}" th:if="${isLogged}"><i class="fa fa-shopping-basket"></i></a>
+                <a class="btn btn-primary" th:if="${role == 'ADMIN'}" th:href="@{/edit/{id}(id=${artPiece.id})}">Edit</a>
+            </div>
+        </div>
+    </th:block>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
